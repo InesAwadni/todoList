@@ -4,7 +4,7 @@ import TodoListItem from "./TodoListItems";
 class TodoList extends React.Component {
   render() {
     return (
-      <div>
+      <div style={{height: '70vh', overflowY:'scroll'}}>
         {this.props.todos.map((todo, key) => {
           return (
             <TodoListItem

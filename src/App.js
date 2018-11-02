@@ -16,7 +16,7 @@ class App extends Component {
       userInput: event.target.value
     });
   };
-  //Add item to list
+  //Add item to list²
   onClickHandler = event => {
     event.preventDefault();
     if (!this.state.userInput) {
@@ -25,7 +25,7 @@ class App extends Component {
         error: error
       });
       return;
-    } 
+    }
     this.setState({
       error: "",
       userInput: "",
@@ -71,43 +71,55 @@ class App extends Component {
   };
   render() {
     return (
-      <div className="container">
-        <div className="row">
+      <div className="container" style={{ height: "90vh" }}>
+        <form className="form-inline row col w-50 pr-5 alignt-items-center justify-content-between my-4">
+          <input
+            className="form-control flex-grow-1"
+            type="text"
+            value={this.state.userInput}
+            placeholder="Todo"
+            onChange={this.onChangeHandler}
+          />
+          <button
+            className="btn btn-primary flex-grow-0 w-25 ml-4"
+            onClick={this.onClickHandler}
+          >
+            Add
+          </button>
+        </form>
+        <div className="row w-100">
           <div className="col-6">
-            <h1>Todo List</h1>
-            {this.state.error && (
-              <div className="alert alert-danger">{this.state.error}</div>
-            )}
-            <form className="form-inline row alignt-items-center justify-content-around">
-              <input
-                className="form-control flex-grow-1"
-                type="text"
-                value={this.state.userInput}
-                placeholder="Todo"
-                onChange={this.onChangeHandler}
+            <div
+              className="bg-info rounded p-3 h-100"
+              style={{ minHeight: "80vh" }}
+            >
+              <h1 className="text-center text-white">Todo List</h1>
+              {this.state.error && (
+                <div className="alert alert-danger">{this.state.error}</div>
+              )}
+
+              <TodoList
+                done={false}
+                todos={this.state.todos}
+                deleteTodoHandler={this.deleteTodoHandler}
+                checkTodoHandler={this.checkTodoHandler}
               />
-              <button
-                className="btn btn-primary flex-grow-0 w-25"
-                onClick={this.onClickHandler}
-              >
-                Add
-              </button>
-            </form>
-            <TodoList
-              done={false}
-              todos={this.state.todos}
-              deleteTodoHandler={this.deleteTodoHandler}
-              checkTodoHandler={this.checkTodoHandler}
-            />
+            </div>
           </div>
           <div className="col-6">
-            <h1>Done List</h1>
-            <TodoList
-              done={true}
-              todos={this.state.done}
-              deleteTodoHandler={this.deleteTodoHandler}
-              checkTodoHandler={this.checkTodoHandler}
-            />
+            <div
+              className="bg-info rounded p-3 h-100"
+              style={{ minHeight: "80vh" }}
+            >
+              <h1 className="text-center text-white">Done List</h1>
+
+              <TodoList
+                done={true}
+                todos={this.state.done}
+                deleteTodoHandler={this.deleteTodoHandler}
+                checkTodoHandler={this.checkTodoHandler}
+              />
+            </div>
           </div>
         </div>
       </div>
